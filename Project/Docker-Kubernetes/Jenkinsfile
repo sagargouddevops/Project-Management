@@ -74,13 +74,11 @@ pipeline{
                 }
                 stage ('Docker Push') {
                  steps{
-                   script {
-                        withDockerRegistry(credentialsId: 'docker-credentials') {
-                            sh "docker push goudsagar/webapp-app-tomcat:latest"
-                     }
-                  }
+                        sh ''' 
+			  docker push goudsagar/webapp-app-tomcat:latest
+	                '''
+                     }      
                }
-           } 
           stage('Kubernetes Deployment') {
             parallel {
               stage('Kubernetes Dev') {
