@@ -21,7 +21,7 @@ pipeline{
 	}
         stage('Git Checkout'){
             steps{
-                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github access', url: 'https://github.com/devopscloudtrainer/Project-Management.git']]])
+                checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'github access', url: 'https://github.com/sagargouddevops/Project-Management.git']]])
             }
         }
         stage('build'){
@@ -65,7 +65,7 @@ pipeline{
                       "files": [
                         {
                           "pattern": "*.war",
-                           "target": "local-snapshot-repo"
+                           "target": "local-snapshot-repository"
                         }
                     ]
                 }'''
@@ -75,7 +75,7 @@ pipeline{
         stage ('Tomcat Deployment') {
            steps {
              script {
-                 deploy adapters: [tomcat7(credentialsId: 'tomcat-credentials', path: '', url: 'http://104.209.211.173:8080')], contextPath: '/webapp-app', onFailure: false, war: 'webapp/target/webapp.war' 
+                 deploy adapters: [tomcat7(credentialsId: 'tomcat-credentials', path: '', url: 'http://3.15.234.51:8080')], contextPath: '/webapp-application', onFailure: false, war: 'webapp/target/webapp.war' 
                     }
                   }
            }
